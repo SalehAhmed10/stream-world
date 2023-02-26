@@ -57,6 +57,7 @@ export const FetchPopular = () => {
                                         title={popular.title}
                                         overview={popular.overview}
                                         poster={popular.poster_path}
+                                        id={popular.id}
                                     />
                                 )
                             })
