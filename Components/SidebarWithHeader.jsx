@@ -36,12 +36,15 @@ import NextLink from 'next/link'
 import AppSearch from './Input/AppSearch';
 
 const LinkItems = [
+  { name: 'Explore', icon: FiCompass, href: '/' },
   {
     name: 'Home', icon: FiHome, href: '/home'
   },
   { name: 'Trending', icon: FiTrendingUp, href: '/trending' },
-  { name: 'Explore', icon: FiCompass, href: '/' },
+
+
   { name: 'Favourites', icon: FiStar, href: '/favourites' },
+
   { name: 'Settings', icon: FiSettings, href: '/explore' },
 ];
 

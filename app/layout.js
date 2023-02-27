@@ -1,17 +1,16 @@
 "use client"
-import { Montserrat } from '@next/font/google'
-import { ChakraProvider, Container, extendBaseTheme, extendTheme, } from '@chakra-ui/react'
+
+import { ChakraProvider, extendTheme, } from '@chakra-ui/react'
 import SidebarWithHeader from '@/Components/SidebarWithHeader'
 import './globals.css'
 import CountProvider from '@/context/Count'
 import ConstantsProvider from '@/context/constants'
 import { Suspense } from 'react'
 
-import Loading from './loading'
-import { mode } from '@chakra-ui/theme-tools'
-import { ColorMode } from '@chakra-ui/react'
-import { extendTheme as extendThemeChakra } from '@chakra-ui/react'
+
+
 import { globalStyles, fonts, colors, config } from './theme'
+import Loading from './loading'
 
 
 
@@ -38,11 +37,11 @@ export default function RootLayout({ children }) {
         head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      {/* className={`${montserrat.className}`} */}
+
       <body >
         <ChakraProvider
           theme={theme}
-          resetCSS={true}
+        // resetCSS={true}
         >
           <ConstantsProvider>
             <CountProvider>

@@ -4,7 +4,7 @@ import { Box, Button, Center, useColorMode, Wrap, WrapItem } from '@chakra-ui/re
 import Link from 'next/link'
 import React from 'react'
 import { useCount } from '@/context/Count'
-import { FetchPopular } from './FetchPopular'
+import { FetchPopular } from './ExplorePage/calls/movies/FetchPopular'
 
 
 export default function Main() {

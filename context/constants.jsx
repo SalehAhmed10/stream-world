@@ -13,6 +13,7 @@ const constants = {
     appDescription: "A Next.js app with Tailwind CSS and TypeScript",
     appUrl: "https://nextjs-tailwind-typescript.vercel.app",
     apiImagePath: "https://image.tmdb.org/t/p/w500",
+    apiCardImagePath: "https://image.tmdb.org/t/p/w300",
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
 }
 

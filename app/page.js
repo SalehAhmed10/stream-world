@@ -1,4 +1,5 @@
-import Main from '@/Components/Main'
+import Main from "@/Components/ExplorePage/Main";
+
 
 
 export default function Home() {
