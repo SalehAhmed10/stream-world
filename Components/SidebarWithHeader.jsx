@@ -33,12 +33,14 @@ import {
 import ThemeToggle from './ThemeToggle';
 import NextLink from 'next/link'
 
+import AppSearch from './Input/AppSearch';
+
 const LinkItems = [
   {
-    name: 'Home', icon: FiHome, href: '/'
+    name: 'Home', icon: FiHome, href: '/home'
   },
   { name: 'Trending', icon: FiTrendingUp, href: '/trending' },
-  { name: 'Explore', icon: FiCompass, href: '/home' },
+  { name: 'Explore', icon: FiCompass, href: '/' },
   { name: 'Favourites', icon: FiStar, href: '/favourites' },
   { name: 'Settings', icon: FiSettings, href: '/explore' },
 ];
@@ -53,7 +55,9 @@ export default function SidebarWithHeader({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')} zIndex={100}>
+    <Box minH="100vh"
+      // bg={useColorModeValue('gray.100', 'gray.900')}
+      zIndex={100}>
       <SidebarContent
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
@@ -88,7 +92,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
       transition="3s ease"
-      bg={useColorModeValue('white', 'gray.900')}
+      // bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
@@ -111,10 +115,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
       ))}
 
       <Divider />
-      {/* Theme toggeler */}
-      <ThemeToggle />
-
-
+      {/* OPTION - Add Thmeme Toggler in SideBar */}
+      {/* <ThemeToggle /> */}
     </Box>
   );
 };
@@ -159,7 +161,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       px={{ base: 4, md: 4 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue('white', 'gray.900')}
+      // bg={useColorModeValue('white', 'gray.900')}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
@@ -172,22 +174,28 @@ const MobileNav = ({ onOpen, ...rest }) => {
         icon={<FiMenu />}
       />
 
-      <Text
+      {/* <Text
         display={{ base: 'flex', md: 'none' }}
         fontSize="2xl"
         fontFamily="monospace"
         fontWeight="bold">
         Logo
-      </Text>
+      </Text> */}
 
-      <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton
+
+      <HStack mx={2} spacing={{ base: '2', md: '6' }} width={{
+        base: '100%',
+        sm: 'auto',
+        md: '100%'
+      }}>
+        <AppSearch />
+        {/* <IconButton
           size="lg"
           variant="ghost"
           aria-label="open menu"
           icon={<FiBell />}
-        />
-
+        /> */}
+        <ThemeToggle />
       </HStack>
     </Flex>
   );
