@@ -7,11 +7,11 @@ import CountProvider from '@/context/Count'
 import ConstantsProvider from '@/context/constants'
 import { Suspense } from 'react'
 
-import Loading from './Loading'
+import Loading from './loading'
 import { mode } from '@chakra-ui/theme-tools'
 import { ColorMode } from '@chakra-ui/react'
 import { extendTheme as extendThemeChakra } from '@chakra-ui/react'
-import { globalStyles, fonts, colors, config } from './Theme'
+import { globalStyles, fonts, colors, config } from './theme'
 
 
 
