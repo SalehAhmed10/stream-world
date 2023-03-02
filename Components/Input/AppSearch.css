@@ -1,14 +1,15 @@
 /* import svg from public folder */
-
+/*
 .search-bar-light {
   background-image: url(../../public//assets/search-light.svg);
   background-repeat: no-repeat;
-  /* background-position: 90%; */
   display: flex;
 }
 
 .search-bar-dark {
   background-image: url(../../public//assets/search-dark.svg);
   background-repeat: no-repeat;
-  /* background-position: 90%; */
-}
+} */
+
+/* background-position: 90%; */
+/* background-position: 90%; */

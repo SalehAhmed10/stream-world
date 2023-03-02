@@ -15,6 +15,7 @@ const constants = {
     apiImagePath: "https://image.tmdb.org/t/p/w500",
     apiCardImagePath: "https://image.tmdb.org/t/p/w300",
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
+    noImage: "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
 }
 
 

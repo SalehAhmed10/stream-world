@@ -188,10 +188,16 @@ const MobileNav = ({ onOpen, ...rest }) => {
 
       <HStack mx={2} spacing={{ base: '2', md: '6' }} width={{
         base: '100%',
-        sm: 'auto',
+        sm: '100%',
         md: '100%'
-      }}>
+      }}
+        justifyContent="space-between"
+      >
+
+        {/* <AppSearch /> on left side 50% width */}
         <AppSearch />
+
+
         {/* <IconButton
           size="lg"
           variant="ghost"

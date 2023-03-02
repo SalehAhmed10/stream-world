@@ -1,11 +1,11 @@
-import { Box, Text, Image, Flex } from '@chakra-ui/react'
-
 import React from 'react'
+import { Box, Text, Image, Flex } from '@chakra-ui/react'
+import Link from 'next/link'
+import './moviecard.css'
+
 import { useConstants } from '@/context/constants'
 import { easeIn, motion, wrap } from 'framer-motion'
-import Link from 'next/link'
 // import css
-import './moviecard.css'
 
 
 
@@ -14,15 +14,19 @@ export default function MovieCard(
         id,
         title,
         key,
-        overview,
         poster,
         rating,
-        release_date
+        release_date,
+        media_type,
+        first_air_date,
+
     }
 ) {
 
-    const { apiImagePath } = useConstants()
+    const { apiImagePath, noImage } = useConstants()
     const { apiCardImagePath } = useConstants()
+
+
 
     // framer motion animation for card
     const variants = {
@@ -51,6 +55,51 @@ export default function MovieCard(
         },
 
     }
+
+
+    // check media type and return the correct media type
+    const checkMediaType = (media_type) => {
+        if (media_type === 'movie') {
+            return 'movie'
+        } else if (media_type === 'tv') {
+            return 'tv'
+        } else {
+            return 'movie'
+        }
+    }
+
+    // release date or first air date for tv shows
+    const releaseDate = (release_date, first_air_date) => {
+        if (release_date) {
+            return release_date
+        } else if (first_air_date) {
+            return first_air_date
+        } else {
+            return 'N/A'
+        }
+    }
+
+    // rating limit 2 digits
+    const ratingLimit = (rating) => {
+        if (rating) {
+            return rating.toFixed(1)
+        } else {
+            return 'N/A'
+        }
+    }
+
+
+    // check if poster is null
+    const checkPoster = (poster) => {
+        if (poster) {
+            return `${apiImagePath}${poster}`
+        } else {
+            return noImage
+        }
+    }
+
+
+
     return (
         <>
 
@@ -74,6 +123,7 @@ export default function MovieCard(
                 columnGap={2}
                 rowGap={1}
                 flexDirection={'column'}
+
             >
                 <motion.div
                     whileHover={hover}
@@ -91,8 +141,9 @@ export default function MovieCard(
 
 
                     <Image src={
-                        `${apiImagePath}${poster}`
-                    } alt=""
+                        checkPoster(poster)
+                    }
+                        alt=""
                         height={{
                             base: '250px',
                             md: '250px',
@@ -122,7 +173,7 @@ export default function MovieCard(
                         className='card-overlay-rating'
 
                     >
-                        {rating}
+                        {ratingLimit(rating)}
                     </Text>
                 </div>
 
@@ -146,7 +197,11 @@ export default function MovieCard(
                         </Text>
                     </Link>
 
-                    <Flex>
+                    <Flex
+                        flexDirection={'row'}
+                        justifyContent={'space-between'}
+
+                    >
                         <Text
                             fontSize={{
                                 base: 'xs',
@@ -158,7 +213,21 @@ export default function MovieCard(
                         // limit the text to 3 lines and add ... if more
 
                         >
-                            {release_date}
+                            {releaseDate(release_date, first_air_date)}
+                        </Text>
+
+                        <Text
+                            fontSize={{
+                                base: 'xs',
+                                md: 'xs',
+                                sm: 'xs',
+                                lg: 'xs',
+                            }}
+                            color={'gray.500'}
+
+                        >
+                            {checkMediaType(media_type)}
+
                         </Text>
 
                     </Flex>
