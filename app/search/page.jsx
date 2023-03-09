@@ -1,21 +1,10 @@
-import SearchPage from '@/Components/SearchPage/SearchPage'
-import React from 'react'
 
-const page = ({
-    params, searchParams
-}) => {
+import SearchPage from "@/Components/SearchPage/SearchPage";
+
+export default function page() {
     return (
-        <div>
-
-            <div>
-                <SearchPage
-                    searchParams={searchParams}
-                    param={params}
-                />
-            </div>
-
-        </div>
+        <>
+            <SearchPage />
+        </>
     )
 }
-
-export default page

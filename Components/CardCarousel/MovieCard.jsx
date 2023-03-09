@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import { Box, Text, Image, Flex } from '@chakra-ui/react'
 import Link from 'next/link'
@@ -123,7 +125,7 @@ export default function MovieCard(
                 columnGap={2}
                 rowGap={1}
                 flexDirection={'column'}
-
+                key={key}
             >
                 <motion.div
                     whileHover={hover}
@@ -132,7 +134,7 @@ export default function MovieCard(
                     initial="hidden"
                     animate="visible"
                     transition={{ duration: 0.5 }}
-                    key={key}
+
 
 
                 >
@@ -237,58 +239,7 @@ export default function MovieCard(
 
             </Box>
 
-            {/* <motion.div
-                variants={variants}
-                initial="hidden"
-                animate="visible"
-                transition={{ duration: 0.5 }}
-                key={key}
-                whileHover={hover}
-            >
-
-                <Box height={{
-                    base: '360px',
-                    md: '360px',
-                    sm: '360px',
-                    lg: '360px',
-                }}
-                    width={{
-                        base: '150px',
-                        md: '150px',
-                        sm: '150px',
-                        lg: '200px',
-
-                    }}
-                >
-                    <Image src={`${apiImagePath}${poster}`} alt={title}
-                        height={{
-                            base: '250px',
-                            md: '250px',
-                            sm: '200px',
-                            lg: '270px',
-
-                        }}
-                        width={{
-                            base: '150px',
-                            md: '200px',
-                            sm: '150px',
-                            lg: '200px',
-                        }}
-                        borderRadius={'lg'}
-                        objectFit={'cover'}
-
-
-
-                    />
-                    <div class="overlay-text" ><div class="overlay-text-rating">7.5<svg fill="#f2b01e" width="10" height="10" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"></path></svg></div></div>
-                    <Text fontSize={'smaller'} mt={2} >
-                        {title}
-                    </Text>
-                </Box>
-            </motion.div> */}
         </>
     )
 }
 
-{/* <Image src={`https://image.tmdb.org/t/p/w500${poster}`} alt={title} width={150} height={70} /> */ }
-{/* <Image src={`${apiImagePath}${poster}`} alt={title} width={150} height={70} /> */ }

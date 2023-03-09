@@ -7,7 +7,7 @@ import { FetchPopular } from './calls/movies/FetchPopular'
 import FetchSciFi from './calls/movies/FetchSciFi'
 
 
-function Main() {
+function ExplorePage() {
     return (
         <>
             {/* popular movies  */}
@@ -51,4 +51,4 @@ function Main() {
     )
 }
 
-export default Main
+export default ExplorePage

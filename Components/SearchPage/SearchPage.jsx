@@ -1,40 +1,33 @@
 "use client"
 
-import { Box, Grid, Text } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Box, Grid, Text } from '@chakra-ui/react';
+
+import { useSearchParams } from 'next/navigation';
+import React, { Suspense, useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-
-
-// import MovieCard from '../CardCarousel/MovieCard' with React.lazy and Suspense for lazy loading
-import { Suspense } from 'react'
-import AppSkeleton from '../AppSkeleton'
-
+import AppSkeleton from '../AppSkeleton';
 const MovieCard = React.lazy(() => import('../CardCarousel/MovieCard'))
 
+function SearchPage() {
+    const searchParams = useSearchParams();
+    const query = searchParams.get('query');
 
 
-const SearchPage = ({
-    params, searchParams
-}) => {
-    const [results, setResults] = useState([])
+    const [results, setResult] = useState([])
     const [totalPages, setTotalPages] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
 
-
     useEffect(() => {
-        setResults([])
+        setResult([])
         setTotalPages(0)
         setCurrentPage(1)
-    }, [searchParams])
-
+    }, [query])
 
     const fetchResults = async (page) => {
         const apiKey = process.env.NEXT_PUBLIC_API_KEY
-        const searchQuery = searchParams.query
-        const response = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`)
-
+        const response = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=${page}&include_adult=false`)
         const data = await response.json()
-        setResults((prevResults) => [...prevResults, ...data.results])
+        setResult((prevResults) => [...prevResults, ...data.results])
         setTotalPages(data.total_pages)
         console.log(data)
         console.log(data.results)
@@ -46,8 +39,7 @@ const SearchPage = ({
 
     useEffect(() => {
         fetchResults(currentPage)
-    }, [currentPage, searchParams])
-
+    }, [currentPage, query])
 
     return (
         <div>
@@ -59,7 +51,7 @@ const SearchPage = ({
                     lg: '1.5rem',
                     xl: '1.5rem',
                 }} fontWeight="bold" color={'gray.500'}>
-                    Search Results for {searchParams.query}
+                    Search Results for {query}
                 </Text>
                 <Text
                     // color lightgray
@@ -72,12 +64,10 @@ const SearchPage = ({
                         xl: '0.8rem',
                     }}
                     fontWeight="thin"
-
                 >
                     Showing {results.length} results
                 </Text>
             </Box>
-
 
             {results.length > 0 && (
                 <>
@@ -86,8 +76,6 @@ const SearchPage = ({
                         next={handleLoadMore}
                         hasMore={currentPage < totalPages}
                         loader={<h4>Loading...</h4>}
-
-
                         style={{
                             overflow: 'hidden',
                             height: '100%',
@@ -111,18 +99,16 @@ const SearchPage = ({
                                 sticky="bottom"
                                 style={{
                                     textAlign: 'center',
-
-                                    fontSize: '0.7rem',
+                                    fontSize: '1rem',
                                     fontWeight: 'thin',
                                     marginTop: '2rem',
                                 }}
-
-
                             >
-                                <b>Yay! You have seen it all</b>
+                                Yay! You have seen it all
                             </Text>
                         }
                     >
+
                         <Grid
 
                             templateColumns={{
@@ -135,38 +121,34 @@ const SearchPage = ({
                             gap={6}
                         >
                             {results.map((item, index) => (
-                                <>
-                                    <Suspense fallback={<AppSkeleton />}
-                                        key={index}
-                                    >
-                                        <MovieCard
-                                            id={item.id}
-                                            title={item.title || item.name}
-                                            key={item.id}
-                                            overview={item.overview}
-                                            poster={item.poster_path}
-                                            rating={item.vote_average}
-                                            release_date={item.release_date}
-                                            media_type={item.media_type}
-                                            index={index}
-                                            first_air_date={item.first_air_date}
+                                <Suspense fallback={<AppSkeleton />}
+                                    key={index}
+                                >
+                                    <MovieCard
+                                        id={item.id}
+                                        title={item.title || item.name}
+                                        // key={item.id}
+                                        overview={item.overview}
+                                        poster={item.poster_path}
+                                        rating={item.vote_average}
+                                        release_date={item.release_date}
+                                        media_type={item.media_type}
+                                        index={index}
+                                        first_air_date={item.first_air_date}
+                                    />
+                                </Suspense>
 
-                                        />
-                                    </Suspense>
-                                </>
 
 
                             ))}
                         </Grid>
                     </InfiniteScroll>
+
                 </>
-            )
-            }
-
-
+            )}
 
         </div>
+
     )
 }
-
 export default SearchPage

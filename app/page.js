@@ -1,11 +1,11 @@
-import Main from "@/Components/ExplorePage/Main";
+"use client"
 
-
+import ExplorePage from "@/Components/ExplorePage/ExplorePage";
 
 export default function Home() {
   return (
     <main>
-      <Main />
+      <ExplorePage />
     </main>
   )
 }

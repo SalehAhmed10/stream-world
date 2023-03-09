@@ -1,13 +1,12 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
-import Router from 'next/navigation'
-import Link from 'next/link'
-import { Button, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from '@chakra-ui/react'
 
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
+import { Box, Button, Flex, Input } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
-import './AppSearch.css'
 import { useColorMode } from '@chakra-ui/react'
+// import { useSearchQuery } from '@/context/SearchQuery'
 
 
 
@@ -15,112 +14,150 @@ function AppSearch() {
 
 
 
-    const [search, setSearch] = useState("")
+    // const [search, setSearch] = useState("")
 
-    const [input, setInput] = useState('')
-    const [isError, setIsError] = useState(false)
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [empty, setEmpty] = useState(false)
+    const router = useRouter();
+    const [query, setQuery] = useState('');
 
     const { colorMode, toggleColorMode } = useColorMode()
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isError, setIsError] = useState(false);
 
 
-    // handle form sumbmit do not refresh page if input is empty or has error
+
+    // disable submit button when search is empty or is submitting a search query to the server
+    const isDisabled = query === '' || isSubmitting;
+
+
+    // onChange={e => setSearchQuery(e.target.value.toLowerCase())}
+    const handleChange = (e) => {
+        setQuery(e.target.value.toLowerCase());
+    }
+
+    // handle form submit on press enter key clear input and set isSubmitting to true
     const handleSubmit = (e) => {
-        e.preventDefault()
-        if (input === '') {
-            setEmpty(true)
-        } else if (isError) {
-            return
-        } else {
+        // e.preventDefault();
+
+        if (query === '') {
+            e.preventDefault();
             setIsSubmitting(true)
+            setQuery('')
             setTimeout(() => {
                 setIsSubmitting(false)
-                console.log('searching for: ' + search)
-            }, 3000)
+                setIsError(true)
+            }, 1000)
+        } else {
+            e.preventDefault();
+            setIsSubmitting(true)
+            setQuery('')
+            setTimeout(() => {
+                setIsSubmitting(false)
+                setIsError(false)
+                router.push(`/search?query=${query}`)
+            }, 200)
+
+            // router.push(`/search?query=${query}`)
         }
     }
 
 
+
+
+
     return (
-        <FormControl isInvalid={isError} onSubmit={handleSubmit}
-            width={{
+
+        <>
+            <Box w={{
                 base: '100%',
-                sm: '100%',
-                md: "50%"
-            }}
-        >
+                md: '100%',
+                lg: '100%',
+                xl: '100%',
+            }}>
+                <form onSubmit={handleSubmit} >
 
-            <Flex align='center' justify='center'>
+                    <Flex >
+                        <Input
+                            type='text'
+                            placeholder={
+                                // if isSubmitting is true then show submitting else show search and if isError is true then show error
+                                isSubmitting ? 'Searching..' : isError ? 'Search Failed | Try Again' : 'Search'
 
-                <Input
-                    type='text'
-                    placeholder={isSubmitting ? 'Searching...' : 'Search'
-                    }
-                    value={search}
-                    // always set value to state to lower case
-                    onChange={e => setSearch(e.target.value.toLowerCase())}
-                    // onpress enter key to submit
-                    className={
-                        colorMode === 'light' ? 'search-bar-dark' : 'search-bar-light'
-                    }
+                            }
+                            value={query}
+                            onChange={handleChange}
+                        // onpress enter key to submit
+                        // className={
+                        //     colorMode === 'light' ? 'search-bar-dark' : 'search-bar-light'
+                        // }
+                        />
+                        <Button
+                            type='submit'
+                            display='none'
+                        >
 
-                />
+                        </Button>
+                    </Flex>
 
-                <Link
-                    href="/search/[query]" as={`/search?query=${search}`}
-                >
-                    <Button type='submit' isLoading={isSubmitting}
-                        // loading state
-
-                        // color scheme
-                        variant='outline'
-                        // variant
-
-                        // size
-                        className='search-button'
-                    // class name
+                </form>
 
 
-                    >
-                        <FiSearch />
-                    </Button>
-                </Link>
+            </Box>
 
-            </Flex>
+            {/* <form onSubmit={handleSubmit}  >
+                <FormControl isInvalid={isError} onSubmit={handleSubmit}>
+                    <Flex align='center' justify='center'>
 
+                        <Input
+                            type='text'
+                            placeholder={
+                                // if isSubmitting is true then show submitting else show search and if isError is true then show error
+                                isSubmitting ? 'Submitting...' : isError ? 'Search Faild' : 'Search'
 
-
-        </FormControl>
-
-
-
-        // <form
-        //     className="search-bar"
-        //     onSubmit={e => {
-        //         e.preventDefault();
-        //         console.log("searching for: " + search)
-
-        //     }}
-        // >
-
-        //     <input
-        //         type="text"
-        //         placeholder="Search"
-        // value={search}
-        // onChange={e => setSearch(e.target.value)}
-        //     />
-
-        //     <Link
-        //         href="/search/[query]" as={`/search?query=${search}`}
-
-        //     >
-        //         <button type="submit">Search</button>
-        //     </Link>
+                            }
+                            value={query}
+                            onChange={handleChange}
+                            // onpress enter key to submit
+                            className={
+                                colorMode === 'light' ? 'search-bar-dark' : 'search-bar-light'
+                            }
+                        />
+                        <Button
+                            type='submit'
+                            // className='hidden'
+                            display='none'
 
 
+                        >
+                            <FiSearch />
+                        </Button>
+                    </Flex>
 
-        // </form>
+
+                </FormControl>
+
+            </form> */}
+
+
+            {/* search input FiSearch icon in background  */}
+            {/* <Input type='text' value={input} onChange={handleInputChange} placeholder={isSubmitting ? 'Submitting...' : 'Search'
+            }
+                // fiSearch icon as background
+                // icon in background
+                background="url('https://img.icons8.com/ios/50/000000/search--v1.png') no-repeat right 1rem center"
+                backgroundRepeat="no-repeat"
+                backgroundPosition="right 1rem center"
+                backgroundSize="1.5rem 1.5rem"
+                // onlick background image to submit
+                onClick={handleSubmit}
+            /> */}
+
+
+
+
+
+
+        </>
+
     );
 }
 
@@ -131,7 +168,62 @@ export default AppSearch
 
 
 
+{/* <form onSubmit={handleSubmit}>
 
+<FormControl
+    width={{
+        base: '100%',
+        sm: '100%',
+        md: "50%"
+    }}
+>
+
+    <Flex align='center' justify='center'>
+
+        <Input
+            type='text'
+            placeholder={isSubmitting ? 'Searching...' : 'Search'
+            }
+            value={query}
+
+
+            onChange={handleChange}
+
+            // onpress enter key to submit
+            className={
+                colorMode === 'light' ? 'search-bar-dark' : 'search-bar-light'
+            }
+
+        />
+
+        {/* <Link
+        href="/search/[query]" as={`/search?query=${searchQuery}`}
+    > */}
+{/* <Button type='submit' isLoading={isSubmitting}
+    // loading state
+
+    // color scheme
+    variant='outline'
+    // variant
+
+    // size
+    className='search-button'
+// class name
+
+
+>
+    <FiSearch />
+</Button>
+{/* </Link> */ }
+
+//     </Flex >
+
+
+
+// </FormControl >
+
+
+// </form > * /} */}
 
 
 
