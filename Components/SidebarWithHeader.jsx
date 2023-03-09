@@ -9,7 +9,7 @@ import {
 
   Icon,
   useColorModeValue,
-  Link,
+
   Drawer,
   DrawerContent,
   Text,
@@ -26,26 +26,26 @@ import {
   FiStar,
   FiSettings,
   FiMenu,
-  FiBell,
-  FiChevronDown,
+
 } from 'react-icons/fi';
 
 import ThemeToggle from './ThemeToggle';
 import NextLink from 'next/link'
 
 import AppSearch from './Input/AppSearch';
+import Link from 'next/link';
 
 const LinkItems = [
   { name: 'Explore', icon: FiCompass, href: '/' },
   {
     name: 'Home', icon: FiHome, href: '/home'
   },
-  { name: 'Trending', icon: FiTrendingUp, href: '/trending' },
+  // { name: 'Trending', icon: FiTrendingUp, href: '/trending' },
 
 
-  { name: 'Favourites', icon: FiStar, href: '/favourites' },
+  // { name: 'Favourites', icon: FiStar, href: '/favourites' },
 
-  { name: 'Settings', icon: FiSettings, href: '/explore' },
+  // { name: 'Settings', icon: FiSettings, href: '/explore' },
 ];
 
 
@@ -109,15 +109,20 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <Link as={NextLink} key={link.name} href={link.href} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
-          <NavItem key={link.name} icon={link.icon}>
+        // <Link as={NextLink} key={link.name} href={link.href} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+
+        <Link
+          key={link.name}
+          href={link.href}
+        >
+          <NavItem icon={link.icon}>
 
             {link.name}
           </NavItem>
         </Link>
       ))}
 
-      <Divider />
+      {/* <Divider /> */}
       {/* OPTION - Add Thmeme Toggler in SideBar */}
       {/* <ThemeToggle /> */}
     </Box>
