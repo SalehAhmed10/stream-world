@@ -101,6 +101,16 @@ export default function MovieCard(
     }
 
 
+    // if mediatype is tv show then add tv to the link path else add movie to the link path
+    const checkLinkPath = (media_type) => {
+        if (media_type === 'tv') {
+            return 'tv'
+        } else {
+            return 'movie'
+        }
+    }
+
+
 
     return (
         <>
@@ -181,7 +191,8 @@ export default function MovieCard(
 
                 <Box >
                     <Link
-                        href={`${id}`}
+                        // href={`/${id}`}
+                        href={`/${checkLinkPath(media_type)}/${id}`}
                     >
                         <Text
                             fontSize={{
