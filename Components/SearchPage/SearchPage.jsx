@@ -10,12 +10,12 @@ const MovieCard = React.lazy(() => import('../CardCarousel/MovieCard'))
 
 function SearchPage() {
     const searchParams = useSearchParams();
-    const query = searchParams.get('query');
-
 
     const [results, setResult] = useState([])
     const [totalPages, setTotalPages] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
+
+    const query = searchParams.has('query') ? searchParams.get('query') : ''
 
     useEffect(() => {
         setResult([])
@@ -41,6 +41,9 @@ function SearchPage() {
         fetchResults(currentPage)
     }, [currentPage, query])
 
+
+
+
     return (
         <div>
             <Box display={'flex'} flexDirection={'column'} pb={5}>
@@ -48,10 +51,11 @@ function SearchPage() {
                     base: '1rem',
                     sm: '1rem',
                     md: '1rem',
-                    lg: '1.5rem',
-                    xl: '1.5rem',
+                    lg: '2rem',
+                    xl: '2rem',
                 }} fontWeight="bold" color={'gray.500'}>
-                    Search Results for {query}
+                    {/* Search Results for {query} */}
+                    {query.length > 0 ? `Search Results for ${query}` : 'Search Something'}
                 </Text>
                 <Text
                     // color lightgray

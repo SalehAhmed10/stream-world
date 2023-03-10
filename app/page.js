@@ -1,4 +1,3 @@
-"use client"
 
 import ExplorePage from "@/Components/ExplorePage/ExplorePage";
 
