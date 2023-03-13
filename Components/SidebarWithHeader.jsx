@@ -21,19 +21,18 @@ import {
 } from '@chakra-ui/react';
 import {
   FiHome,
-  FiTrendingUp,
   FiCompass,
-  FiStar,
-  FiSettings,
   FiMenu,
+
 
 } from 'react-icons/fi';
 
 import ThemeToggle from './ThemeToggle';
-import NextLink from 'next/link'
+
 
 import AppSearch from './Input/AppSearch';
 import Link from 'next/link';
+import GoBack from './Accessibility/GoBack';
 
 const LinkItems = [
   { name: 'Explore', icon: FiCompass, href: '/' },
@@ -198,6 +197,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
       }}
         justifyContent="space-between"
       >
+        {/* back arrow icon  */}
+        <GoBack />
 
         {/* <AppSearch /> on left side 50% width */}
         <AppSearch />

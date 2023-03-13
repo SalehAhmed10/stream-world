@@ -74,7 +74,8 @@ export default function DetailPage({ movieId, tvId }) {
                             objectFit='cover'
                             borderRadius='2xl'
                             transition='all 0.3s ease-in-out'
-                            loading="lazy"
+                            objectPosition='center center'
+
                         />
                     </Box>
 
