@@ -1,4 +1,6 @@
+import AppSkeleton from "@/Components/AppSkeleton"
 import DetailPage from "@/Components/DetailPage/DetailPage"
+import { Suspense } from "react"
 
 
 export default function page({ params }) {
@@ -9,10 +11,11 @@ export default function page({ params }) {
     return (
         <>
 
-            <h1>Tv Page</h1>
-            <h2>{id}</h2>
-
-            <DetailPage tvId={id} />
+            {/* <h1>Tv Page</h1>
+            <h2>{id}</h2> */}
+            <Suspense fallback={AppSkeleton}>
+                <DetailPage tvId={id} />
+            </Suspense>
         </>
     )
 
