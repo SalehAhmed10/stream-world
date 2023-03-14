@@ -26,11 +26,18 @@ const globalStyles = {
         },
 
         '.sectionPara': {
-            color: mode('#808191', '##808191')(props),
+            color: mode('#808191', '#808191')(props),
             // bold
             fontWeight: '100',
             fontSize: '15px',
         },
+
+        '.span-hover': {
+            _hover: {
+                backgroundColor: mode('rgba(209,213,219,.3)', 'rgba(209,213,219,.3)')(props),
+                color: mode('black', 'white')(props),
+            }
+        }
     }),
 
 }

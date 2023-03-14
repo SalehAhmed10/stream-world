@@ -1,15 +1,21 @@
 "use client"
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Container, Image, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { useConstants } from '@/context/constants'
+import VideoCarousel from "../CardCarousel/VideoCarousel";
+import AppSkeleton from "../AppSkeleton";
+// import VideoPlayer from "./VideoPlayer"; lazy import
+const VideoPlayer = React.lazy(() => import('./VideoPlayer'))
 
 
 export default function DetailPage({ movieId, tvId }) {
 
     const [detail, setDetail] = useState([]);
+
+    const [detailVideos, setDetailVideos] = useState([]);
 
     const getSearchParam = usePathname()
 
@@ -40,10 +46,11 @@ export default function DetailPage({ movieId, tvId }) {
         const fetchDetail = async () => {
             const apiKey = process.env.NEXT_PUBLIC_API_KEY
             // fetch using id to get movie or tv show details
-            const response = await fetch(`https://api.themoviedb.org/3/${checkMediaType(isTv, isMovie)}/${movieId || tvId}?api_key=${apiKey}&language=en-US`)
+            const response = await fetch(`https://api.themoviedb.org/3/${checkMediaType(isTv, isMovie)}/${movieId || tvId}?api_key=${apiKey}&language=en-US&append_to_response=videos`)
             const data = await response.json()
             setDetail(data)
             console.log(data)
+            setDetailVideos(data.videos.results)
         }
         fetchDetail()
 
@@ -233,10 +240,11 @@ export default function DetailPage({ movieId, tvId }) {
                                                 marginTop='3px'
                                                 padding='7px 10px'
                                                 transition='all 0.3s ease-in-out'
-                                                _hover={{
-                                                    backgroundColor: useColorModeValue('rgba(209,213,219,.3)', 'rgba(209,213,219,.3)'),
-                                                    color: useColorModeValue('black', 'white'),
-                                                }}
+                                                className="span-hover"
+                                            // _hover={{
+                                            //     backgroundColor: useColorModeValue('rgba(209,213,219,.3)', 'rgba(209,213,219,.3)'),
+                                            //     color: useColorModeValue('black', 'white'),
+                                            // }}
                                             >
                                                 {genre.name}
                                                 {index < detail.genres.length - 1 ? " " : ""}
@@ -270,22 +278,12 @@ export default function DetailPage({ movieId, tvId }) {
                                 }
                             }>
                                 <Text
-                                    // fontSize={{
-                                    //     base: '2xl',
-                                    //     sm: '1xl',
-                                    //     md: '2.5xl',
-                                    //     lg: '4xl',
-                                    //     xl: '4xl',
-                                    // }}
-                                    //     fontWeight='700'
-                                    //     margin='5px 0'
                                     whiteSpace='pre-wrap'
-                                    // textAlign='center'
                                     className="sectionHeading"
                                 >
                                     Overview
                                 </Text>
-                                {/* overview use .secondColor form theme  */}
+
                                 <Text
                                     className="sectionPara"
                                 >
@@ -293,46 +291,74 @@ export default function DetailPage({ movieId, tvId }) {
                                 </Text>
                             </Box>
 
-                            <Box py={
-                                {
-                                    base: '20px',
-                                    sm: '20px',
-                                    md: '30px',
-                                    lg: '30px',
-                                    xl: '30px',
-                                }
-                            }>
-                                <Text
-                                    // fontSize={{
-                                    //     base: '2xl',
-                                    //     sm: '1xl',
-                                    //     md: '2.5xl',
-                                    //     lg: '4xl',
-                                    //     xl: '4xl',
-                                    // }}
-                                    //     fontWeight='700'
-                                    //     margin='5px 0'
-                                    whiteSpace='pre-wrap'
-                                    // textAlign='center'
-                                    className="sectionHeading"
-                                >
-                                    Overview
-                                </Text>
-                                {/* overview use .secondColor form theme  */}
-                                <Text
-                                    className="sectionPara"
-                                >
-                                    {detail.overview}
-                                </Text>
+
+                            <Box>
+                                {detailVideos.length > 0 ? (
+
+                                    <VideoCarousel slidesToShow={1} slidesToScroll={1}>
+                                        {
+                                            detailVideos.map((videos, index) => {
+                                                return (
+
+                                                    <VideoPlayer
+                                                        key={index}
+                                                        videoId={videos.key}
+                                                        title={videos.name}
+                                                        description={videos.description}
+
+                                                    />
+                                                )
+                                            })
+                                        }
+                                    </VideoCarousel>
+                                ) : (
+                                    <Box
+                                        display='flex'
+                                        flexDirection='column'
+                                        justifyItems={{
+                                            base: 'center',
+                                            sm: 'center',
+
+                                        }}
+                                        alignItems={{
+                                            base: 'center',
+                                            sm: 'center',
+
+                                        }}
+                                    >
+                                        <Text
+                                            fontSize={{
+                                                base: '2xl',
+                                                sm: '1xl',
+                                                md: '2.5xl',
+                                                lg: '4xl',
+                                                xl: '4xl',
+                                            }}
+                                            fontWeight='700'
+                                            margin='5px 0'
+                                            whiteSpace='pre-wrap'
+                                            textAlign={{
+                                                base: 'center',
+                                                sm: 'center',
+                                                md: 'left',
+                                                lg: 'left',
+                                                xl: 'left',
+
+                                            }}
+
+                                        >
+                                            No Videos Found
+                                        </Text>
+                                    </Box>
+                                )}
+
                             </Box>
                         </Box>
-
-
                     </section>
                 </>
             ) : (
                 <>
-                    <h1>Loading</h1>
+                    <AppSkeleton />
                 </>
             )}
 
