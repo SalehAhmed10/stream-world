@@ -19,10 +19,10 @@ const globalStyles = {
         },
 
         '.sectionHeading': {
-            color: mode('#2f2f33', '##f5f5f5')(props),
+            color: mode('#2f2f33', '#DADADA')(props),
             // bold
             fontWeight: 'bold',
-            fontSize: '22px',
+            fontSize: '24px',
         },
 
         '.sectionPara': {
@@ -30,7 +30,6 @@ const globalStyles = {
             // bold
             fontWeight: '100',
             fontSize: '15px',
-            lineHeight: '17.5px',
         },
     }),
 

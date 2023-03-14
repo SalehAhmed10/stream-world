@@ -4,6 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Container, Image, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { useConstants } from '@/context/constants'
 
 
 export default function DetailPage({ movieId, tvId }) {
@@ -16,6 +17,8 @@ export default function DetailPage({ movieId, tvId }) {
 
     const isTv = getSearchParam.includes("tv")
 
+    const { noImage } = useConstants()
+
     const checkMediaType = (isTv, isMovie) => {
         if (isTv) {
             return 'tv'
@@ -24,7 +27,14 @@ export default function DetailPage({ movieId, tvId }) {
         }
     }
 
-
+    // check if there is poster image
+    const checkPoster = (detail, size) => {
+        if (detail.poster_path) {
+            return `https://image.tmdb.org/t/p/${size}/${detail.poster_path}`
+        } else {
+            return noImage
+        }
+    }
 
     useEffect(() => {
         const fetchDetail = async () => {
@@ -60,7 +70,9 @@ export default function DetailPage({ movieId, tvId }) {
                             marginBottom='25px'
                         >
                             <Image
-                                src={`https://image.tmdb.org/t/p/w1280/${detail.poster_path}`} alt={detail.title}
+                                // src={`https://image.tmdb.org/t/p/w1280/${detail.poster_path}`}
+                                src={checkPoster(detail, 'w1280')}
+                                alt={detail.title}
                                 width={{
                                     base: "100%",
                                     md: "100%",
@@ -119,7 +131,8 @@ export default function DetailPage({ movieId, tvId }) {
                             }}
                         >
                             <Image
-                                src={`https://image.tmdb.org/t/p/w300/${detail.poster_path}`}
+                                // src={`https://image.tmdb.org/t/p/w300/${detail.poster_path}`}
+                                src={checkPoster(detail, 'w300')}
                                 alt={detail.title}
                                 borderRadius='30px'
                                 boxShadow='0 8px 16px 0 rgb(0 0 0 / 30%)'
@@ -170,7 +183,14 @@ export default function DetailPage({ movieId, tvId }) {
                                     fontWeight='700'
                                     margin='5px 0'
                                     whiteSpace='pre-wrap'
-                                // textAlign='center'
+                                    textAlign={{
+                                        base: 'center',
+                                        sm: 'center',
+                                        md: 'left',
+                                        lg: 'left',
+                                        xl: 'left',
+
+                                    }}
 
                                 >
                                     {detail.title || detail.name}
@@ -234,7 +254,7 @@ export default function DetailPage({ movieId, tvId }) {
 
                         <Box
                             padding={{
-                                base: '0 20px',
+                                base: '0 0px',
                                 sm: '0 10px',
                                 md: '0 20px',
                                 lg: '0 20px',
@@ -272,16 +292,7 @@ export default function DetailPage({ movieId, tvId }) {
                                     {detail.overview}
                                 </Text>
                             </Box>
-                        </Box>
 
-                        <Box
-                            padding={{
-                                base: '0 20px',
-                                sm: '0 10px',
-                                md: '0 20px',
-                                lg: '0 20px',
-                            }}
-                        >
                             <Box py={
                                 {
                                     base: '20px',
