@@ -173,6 +173,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}>
+      {/* back arrow icon  */}
+      <GoBack />
       <IconButton
         display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}
@@ -197,8 +199,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       }}
         justifyContent="space-between"
       >
-        {/* back arrow icon  */}
-        <GoBack />
+
 
         {/* <AppSearch /> on left side 50% width */}
         <AppSearch />

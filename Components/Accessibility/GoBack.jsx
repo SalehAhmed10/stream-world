@@ -23,6 +23,11 @@ export default function GoBack() {
                 aria-label="open menu"
                 icon={<FiArrowLeft />}
                 onClick={goBack}
+                display={{
+                    base: 'flex',
+                    md: 'none'
+
+                }}
             />
         </div>
     )
