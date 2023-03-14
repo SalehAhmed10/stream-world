@@ -3,9 +3,7 @@ import { mode } from '@chakra-ui/theme-tools'
 const config = {
     initialColorMode: 'dark  || system ',
     useSystemColorMode: true,
-
-
-  }
+}
 
 const globalStyles = {
     global: (props) => ({
@@ -20,12 +18,20 @@ const globalStyles = {
             color: mode('black', 'white')(props),
         },
 
-
-        '.second': {
-            bg: mode('gray.500', 'rgba(255, 255, 255, 0.05)')(props),
-            color: mode('black', 'white')(props),
+        '.sectionHeading': {
+            color: mode('#2f2f33', '##f5f5f5')(props),
+            // bold
+            fontWeight: 'bold',
+            fontSize: '22px',
         },
 
+        '.sectionPara': {
+            color: mode('#808191', '##808191')(props),
+            // bold
+            fontWeight: '100',
+            fontSize: '15px',
+            lineHeight: '17.5px',
+        },
     }),
 
 }
@@ -33,8 +39,6 @@ const globalStyles = {
 const fonts = {
     // use DM Sans as the default font
     body: "sans-serif" || "Poppins",
-
-
     heading: "sans-serif" || " Poppins",
     mono: "sans-serif" || "Poppins",
 }
@@ -45,18 +49,20 @@ const fonts = {
 const colors = {
     light: {
         bg: '#f5f5f5',
-        text: '#000',
+        // text: '#000',
+        text: '#2f2f33',
         borderColor: 'blue',
     },
     dark: {
         bg: '#0a1016',
-        text: '#fff',
+        // text: '#fff',
+        text: '#f5f5f5',
         borderColor: 'red',
     },
 }
 
 
-export { globalStyles, fonts, colors , config }
+export { globalStyles, fonts, colors, config }
 
 
 
