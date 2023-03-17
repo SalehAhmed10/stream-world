@@ -1,7 +1,12 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
+import PropTypes from "prop-types";
 
 export default function VideoPlayer({ videoId }) {
+
+
+    // cockie same site none youtube emebed fix this is a hack
+
 
     return (
         <Box
@@ -18,26 +23,23 @@ export default function VideoPlayer({ videoId }) {
                 xl: "100%",
             }}
 
-            borderRadius="20px"
-
-
-
         >
             <iframe
+                width="853"
+                height="480"
                 src={`https://www.youtube.com/embed/${videoId}`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+
                 allowFullScreen
-                loading="lazy"
-                width="100%"
-                height="100%"
-                crossOrigin="anonymous"
+                title="Embedded youtube"
                 style={{
                     borderRadius: "20px",
                 }}
-            >
-            </iframe>
-
+            />
         </Box>
 
     )
+}
+
+VideoPlayer.protoTypes = {
+    videoId: PropTypes.string.isRequired,
 }

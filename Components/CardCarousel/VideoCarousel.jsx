@@ -7,12 +7,15 @@ import { Container } from '@chakra-ui/react';
 
 export default function VideoCarousel({ children }) {
 
+
+
     var settings = {
         infinite: false,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
+        arrows: true,
         responsive: [
 
             {
@@ -24,7 +27,6 @@ export default function VideoCarousel({ children }) {
                     dots: false,
                     arrows: true,
                     touchThreshold: 10,
-
                     waitForAnimate: true,
                 }
             },

@@ -7,8 +7,11 @@ import { Box, Container, Image, Text, useColorMode, useColorModeValue } from "@c
 import { useConstants } from '@/context/constants'
 import VideoCarousel from "../CardCarousel/VideoCarousel";
 import AppSkeleton from "../AppSkeleton";
-// import VideoPlayer from "./VideoPlayer"; lazy import
-const VideoPlayer = React.lazy(() => import('./VideoPlayer'))
+// import VideoPlayer from "./VideoPlayer"
+
+import dynamic from 'next/dynamic'
+const VideoPlayer = dynamic(() => import('./VideoPlayer'), { ssr: false })
+
 
 
 export default function DetailPage({ movieId, tvId }) {
@@ -50,7 +53,11 @@ export default function DetailPage({ movieId, tvId }) {
             const data = await response.json()
             setDetail(data)
             console.log(data)
-            setDetailVideos(data.videos.results)
+            // check if its undefined or not
+            if (data.videos.results) {
+                setDetailVideos(data.videos.results)
+            }
+
         }
         fetchDetail()
 
@@ -292,20 +299,18 @@ export default function DetailPage({ movieId, tvId }) {
                             </Box>
 
 
-                            <Box>
+                            <Box >
                                 {detailVideos.length > 0 ? (
 
-                                    <VideoCarousel slidesToShow={1} slidesToScroll={1}>
+                                    <VideoCarousel>
                                         {
                                             detailVideos.map((videos, index) => {
                                                 return (
-
                                                     <VideoPlayer
                                                         key={index}
                                                         videoId={videos.key}
                                                         title={videos.name}
                                                         description={videos.description}
-
                                                     />
                                                 )
                                             })
@@ -315,11 +320,7 @@ export default function DetailPage({ movieId, tvId }) {
                                     <Box
                                         display='flex'
                                         flexDirection='column'
-                                        justifyItems={{
-                                            base: 'center',
-                                            sm: 'center',
 
-                                        }}
                                         alignItems={{
                                             base: 'center',
                                             sm: 'center',
@@ -337,17 +338,9 @@ export default function DetailPage({ movieId, tvId }) {
                                             fontWeight='700'
                                             margin='5px 0'
                                             whiteSpace='pre-wrap'
-                                            textAlign={{
-                                                base: 'center',
-                                                sm: 'center',
-                                                md: 'left',
-                                                lg: 'left',
-                                                xl: 'left',
-
-                                            }}
 
                                         >
-                                            No Videos Found
+                                            No Video Found
                                         </Text>
                                     </Box>
                                 )}
@@ -357,9 +350,9 @@ export default function DetailPage({ movieId, tvId }) {
                     </section>
                 </>
             ) : (
-                <>
-                    <AppSkeleton />
-                </>
+
+                <AppSkeleton />
+
             )}
 
         </>

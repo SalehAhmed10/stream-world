@@ -8,3 +8,10 @@
 body {
   scroll-behavior: smooth;
 }
+
+/* if theme is dark  */
+.slick-prev:before,
+.slick-next:before {
+  /* rgba(0, 0, 0, 0.75) */
+  color: #6a5f5f !important;
+}
