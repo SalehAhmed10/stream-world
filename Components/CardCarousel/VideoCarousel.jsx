@@ -15,6 +15,7 @@ export default function VideoCarousel({ children }) {
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
+
         arrows: true,
         responsive: [
 

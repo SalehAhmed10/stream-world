@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { AspectRatio } from '@chakra-ui/react'
 import React from 'react'
 import PropTypes from "prop-types";
 
@@ -9,24 +9,8 @@ export default function VideoPlayer({ videoId }) {
 
 
     return (
-        <Box
-            height={{
-                base: "200px",
-                md: "300px",
-                lg: "400px",
-                xl: "500px",
-            }}
-            width={{
-                base: "100%",
-                md: "100%",
-                lg: "100%",
-                xl: "100%",
-            }}
-
-        >
+        <AspectRatio ratio={16 / 9}>
             <iframe
-                width="853"
-                height="480"
                 src={`https://www.youtube.com/embed/${videoId}`}
 
                 allowFullScreen
@@ -35,7 +19,7 @@ export default function VideoPlayer({ videoId }) {
                     borderRadius: "20px",
                 }}
             />
-        </Box>
+        </AspectRatio>
 
     )
 }

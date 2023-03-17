@@ -1,9 +1,8 @@
 "use client"
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Box, Container, Image, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, Image, Text, } from "@chakra-ui/react";
 import { useConstants } from '@/context/constants'
 import VideoCarousel from "../CardCarousel/VideoCarousel";
 import AppSkeleton from "../AppSkeleton";
