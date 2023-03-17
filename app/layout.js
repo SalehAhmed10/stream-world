@@ -1,17 +1,15 @@
-"use client"
+"use client";
 
 import { ChakraProvider, extendTheme, } from '@chakra-ui/react'
 import SidebarWithHeader from '@/Components/SidebarWithHeader'
 import './globals.css'
 import CountProvider from '@/context/Count'
 import ConstantsProvider from '@/context/constants'
-import { Suspense } from 'react'
-
-
-
+import { Suspense, useEffect, useState } from 'react'
 import { globalStyles, fonts, colors, config } from './theme'
 import Loading from './loading'
-
+import SplashScreen from '@/Components/Accessibility/SplashScreen'
+import { usePathname } from 'next/navigation'
 
 
 // const montserrat = Montserrat({
@@ -30,6 +28,16 @@ const theme = extendTheme({
 
 export default function RootLayout({ children }) {
 
+  const pathname = usePathname()
+
+  const isHome = pathname === '/'
+
+  const [isLoading, setIsLoading] = useState(isHome)
+
+  useEffect(() => {
+    if (isLoading) return
+  }, [isLoading])
+
   return (
     <html lang="en">
       {/*
@@ -45,12 +53,17 @@ export default function RootLayout({ children }) {
         >
           <ConstantsProvider>
             <CountProvider>
-              <SidebarWithHeader>
-                <Suspense fallback={<Loading />}>
+              {isLoading && isHome ? (
+                <SplashScreen finishLoading={(() => setIsLoading(false))} />
+              ) :
+                <>
+                  <SidebarWithHeader>
+                    <Suspense fallback={<Loading />}>
 
-                  {children}
-                </Suspense>
-              </SidebarWithHeader>
+                      {children}
+                    </Suspense>
+                  </SidebarWithHeader>
+                </>}
             </CountProvider>
           </ConstantsProvider>
         </ChakraProvider>
