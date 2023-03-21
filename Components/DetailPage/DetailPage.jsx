@@ -38,7 +38,7 @@ export default function DetailPage({ movieId, tvId }) {
     // check if there is poster image
     const checkPoster = (detail, size) => {
         if (detail.poster_path) {
-            return `https://image.tmdb.org/t/p/${size}/${detail.poster_path}`
+            return `https://image.tmdb.org/t/p/${size}${detail.poster_path}`
         } else {
             return noImage
         }
@@ -52,9 +52,11 @@ export default function DetailPage({ movieId, tvId }) {
             const data = await response.json()
             setDetail(data)
             console.log(data)
-            // check if its undefined or not
-            if (data.videos.results) {
+            /// data.videos is undefined donot set state if undefined
+            if (data.videos) {
                 setDetailVideos(data.videos.results)
+            } else {
+                setDetailVideos([])
             }
 
         }
@@ -84,7 +86,8 @@ export default function DetailPage({ movieId, tvId }) {
                         >
                             <Image
                                 // src={`https://image.tmdb.org/t/p/w1280/${detail.poster_path}`}
-                                src={checkPoster(detail, 'w1280')}
+                                // src={checkPoster(detail, 'w1280')}
+                                src={detail.backdrop_path ? `https://image.tmdb.org/t/p/w1280/${detail.backdrop_path}` : noImage}
                                 alt={detail.title}
                                 width={{
                                     base: "100%",
