@@ -3,7 +3,7 @@
 
 ### next js movie db app
 
-### Stack : Nextjs | ChakraUi | Slider
+### Stack : Nextjs | ChakraUi | Slider | Theme Toggeler
 
 
 
