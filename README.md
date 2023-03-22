@@ -3,7 +3,7 @@
 
 ### next js movie db app
 
-### Stack : Nextjs | ChakraUi
+### Stack : Nextjs | ChakraUi | Slider
 
 
 
