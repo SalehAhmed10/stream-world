@@ -36,15 +36,6 @@ import GoBack from './Accessibility/GoBack';
 
 const LinkItems = [
   { name: 'Explore', icon: FiCompass, href: '/' },
-  {
-    name: 'Home', icon: FiHome, href: '/home'
-  },
-  // { name: 'Trending', icon: FiTrendingUp, href: '/trending' },
-
-
-  // { name: 'Favourites', icon: FiStar, href: '/favourites' },
-
-  // { name: 'Settings', icon: FiSettings, href: '/explore' },
 ];
 
 
@@ -115,6 +106,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <Link
           key={link.name}
           href={link.href}
+          // prevent page reload
+          passHref
+          
+
         >
           <NavItem icon={link.icon}>
 
@@ -122,6 +117,15 @@ const SidebarContent = ({ onClose, ...rest }) => {
           </NavItem>
         </Link>
       ))}
+
+      <Link href="/about">
+        <NavItem icon={FiHome}>About</NavItem>
+      </Link>
+
+      <Link href="/">
+        <NavItem icon={FiHome}>Home</NavItem>
+      </Link>
+
 
       {/* <Divider /> */}
       {/* OPTION - Add Thmeme Toggler in SideBar */}
