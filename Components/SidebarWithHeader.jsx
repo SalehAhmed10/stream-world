@@ -118,15 +118,6 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </Link>
       ))}
 
-      <Link href="/about">
-        <NavItem icon={FiHome}>About</NavItem>
-      </Link>
-
-      <Link href="/">
-        <NavItem icon={FiHome}>Home</NavItem>
-      </Link>
-
-
       {/* <Divider /> */}
       {/* OPTION - Add Thmeme Toggler in SideBar */}
       {/* <ThemeToggle /> */}

@@ -16,7 +16,7 @@ export default function SplashScreen({ finishLoading }) {
         setIsMounted(true)
         setTimeout(() => {
             finishLoading()
-        }, 4000)
+        }, 2000)
     }, 0)
 
     return (
