@@ -1,16 +1,17 @@
 
-# Stream World
-
-
-- [@SalehAhmed10](https://www.github.com/SalehAhmed10)
-- [stream-world.vercel.app/](stream-world.vercel.app/)
-
-
+# Stream World 
 ### next js movie db app
 
-### Stack : Nextjs | ChakraUi | Slider | Theme Toggeler
 
-##### Desktop View | Detail Page
+| author  | Demo  |
+|---|---|
+|  [@SalehAhmed10](https://www.github.com/SalehAhmed10)| [stream-world.vercel.app/](stream-world.vercel.app/)   |
+
+
+### Stack : Nextjs | ChakraUi | Slider | Theme Switch
+#### Data/Api : TMDB(https://www.themoviedb.org/)
+
+##### Mobile View | Detail Page
 
 <p align='center'>
   <img src="https://user-images.githubusercontent.com/44835364/229462534-b96ba367-d1eb-48de-813d-4b0aeffb8e93.png" width="45%" />
