@@ -3,6 +3,8 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  /* scroll snap type */
+  /* scroll-snap-type: y mandatory; */
 }
 
 body {
@@ -15,3 +17,19 @@ body {
   /* rgba(0, 0, 0, 0.75) */
   color: #6a5f5f !important;
 }
+
+
+.chakra-ui-dark .css-1o3pyl4:not([data-theme]), [data-theme=dark] .css-1o3pyl4:not([data-theme]), .css-1o3pyl4[data-theme=dark]{
+  background-color: transparent !important;
+  box-shadow: none;
+  width: 6rem !important;
+  
+}
+
+.chakra-ui-dark .css-1o3pyl4:not([data-theme]), [data-theme=light] .css-1o3pyl4:not([data-theme]), .css-1o3pyl4[data-theme=lio]{
+  background-color: transparent !important;
+  box-shadow: none;
+  width: 6rem !important;
+  
+}
+

@@ -9,6 +9,9 @@ import AppSkeleton from "../AppSkeleton";
 // import VideoPlayer from "./VideoPlayer"
 
 import dynamic from 'next/dynamic'
+
+import JustHeader from "../Headers/JustHeader";
+
 const VideoPlayer = dynamic(() => import('./VideoPlayer'), { ssr: false })
 
 
@@ -74,16 +77,17 @@ export default function DetailPage({ movieId, tvId }) {
 
                         <Box
                             height={{
-                                base: '50vh',
+                                base: '60vh',
                             }}
                             width={{
                                 base: '100%'
                             }}
                             background='transparent'
-                            transition='all 0.3s ease-in-out'
+                            transition='all 0.5s ease-in-out'
                             // margin-bottom: 25px;
                             marginBottom='25px'
                         >
+                            <JustHeader/>
                             <Image
                                 // src={`https://image.tmdb.org/t/p/w1280/${detail.poster_path}`}
                                 // src={checkPoster(detail, 'w1280')}
@@ -101,7 +105,8 @@ export default function DetailPage({ movieId, tvId }) {
 
                                 }}
                                 objectFit='cover'
-                                borderRadius='2xl'
+                                // border radius bottom left and right
+                                borderRadius='0 0 2xl 2xl'
                                 transition='all 0.3s ease-in-out'
                                 objectPosition='center center'
 
@@ -212,7 +217,7 @@ export default function DetailPage({ movieId, tvId }) {
                                     {detail.title || detail.name}
                                 </Text>
 
-                                <Text
+                                <Box
                                     fontSize={{
                                         base: '15px',
                                         sm: '15px',
@@ -261,7 +266,7 @@ export default function DetailPage({ movieId, tvId }) {
                                         )
                                     })}
 
-                                </Text>
+                                </Box>
                             </Box>
                         </Box>
 
@@ -301,7 +306,7 @@ export default function DetailPage({ movieId, tvId }) {
                             </Box>
 
 
-                            <Box >
+                            {/* <Box >
                                 {detailVideos.length > 0 ? (
 
                                     <VideoCarousel>
@@ -347,7 +352,7 @@ export default function DetailPage({ movieId, tvId }) {
                                     </Box>
                                 )}
 
-                            </Box>
+                            </Box> */}
                         </Box>
                     </section>
                 </>

@@ -7,13 +7,14 @@ import React, { Suspense, useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import AppSkeleton from '../AppSkeleton';
 const MovieCard = React.lazy(() => import('../CardCarousel/MovieCard'))
+import { useSearchLoading } from '@/context/SearchLoading'
 
 function SearchPage() {
     const searchParams = useSearchParams();
-
     const [results, setResult] = useState([])
     const [totalPages, setTotalPages] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
+    const { isSearchLoading, setIsSearchLoading } = useSearchLoading()
 
     const query = searchParams.has('query') ? searchParams.get('query') : ''
 
@@ -25,8 +26,10 @@ function SearchPage() {
 
     const fetchResults = async (page) => {
         const apiKey = process.env.NEXT_PUBLIC_API_KEY
+        setIsSearchLoading(true)
         const response = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=${page}&include_adult=false`)
         const data = await response.json()
+        setIsSearchLoading(false)
         setResult((prevResults) => [...prevResults, ...data.results])
         setTotalPages(data.total_pages)
         console.log(data)
@@ -46,7 +49,10 @@ function SearchPage() {
 
     return (
         <div>
-            <Box display={'flex'} flexDirection={'column'} pb={5}>
+            <Box display={'flex'} flexDirection={'column'} pb={5} pt={{
+                base: '80px',
+                md:'100px'
+            }}>
                 <Text fontSize={{
                     base: '1rem',
                     sm: '1rem',

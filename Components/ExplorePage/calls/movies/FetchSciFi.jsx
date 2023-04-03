@@ -49,7 +49,7 @@ export default function FetchSciFi() {
                             <Text fontSize={'2xl'} fontWeight={'thin'} mb={4}>
                                 Top Sci-Fi
                             </Text>
-                            <Carousel slidesToShow={3} slidesToScroll={3}>
+                            <Carousel >
                                 {
                                     scifi.map((scifi, index) => {
                                         return (

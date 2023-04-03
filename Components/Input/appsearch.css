@@ -1,0 +1,28 @@
+
+/* background="url('https://img.icons8.com/color/search.png') "
+// background size
+backgroundSize='1.5rem'
+backgroundRepeat="no-repeat"
+backgroundPosition="right 1rem center" */
+
+.search-bar{
+    /* background-size: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    font-size: 1rem;
+    outline: none; */
+    
+    /* background: url('https://img.icons8.com/color/search.png') no-repeat right 1rem center;
+    transition: all 0.3s ease-in-out; */
+    /* background-image: url('/assets/search-dark.svg');
+    background-repeat: no-repeat;
+    background-position: 90% 50%;
+    background-size: 1.5rem;
+    border: 0px ;
+    outline: none;
+    border-radius: 5px; */
+
+
+}

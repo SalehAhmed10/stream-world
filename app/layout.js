@@ -1,15 +1,18 @@
 "use client";
 
 import { ChakraProvider, extendTheme, } from '@chakra-ui/react'
-import SidebarWithHeader from '@/Components/SidebarWithHeader'
+
 import './globals.css'
-import CountProvider from '@/context/Count'
+
 import ConstantsProvider from '@/context/constants'
 import { Suspense, useEffect, useState } from 'react'
 import { globalStyles, fonts, colors, config } from './theme'
-import Loading from './loading'
+
 import SplashScreen from '@/Components/Accessibility/SplashScreen'
 import { usePathname } from 'next/navigation'
+import SideBarToggleProvider from '@/context/SideBarToggle';
+import SearchLoadingProvider from '@/context/SearchLoading';
+import SearchLoader from '@/Components/Accessibility/SearchLoader';
 
 
 // const montserrat = Montserrat({
@@ -51,21 +54,26 @@ export default function RootLayout({ children }) {
           theme={theme}
         // resetCSS={true}
         >
+          <SearchLoadingProvider>
+          <SideBarToggleProvider> 
+
           <ConstantsProvider>
-            <CountProvider>
-              {isLoading && isHome ? (
+         
+              {/* {isLoading && isHome ? (
                 <SplashScreen finishLoading={(() => setIsLoading(false))} />
               ) :
-                <>
-                  <SidebarWithHeader>
-                    <Suspense fallback={<Loading />}>
-
+                <> */}
+                
+                    {/* <Suspense fallback={<Loading />}> */}
+                  <SearchLoader/>
                       {children}
-                    </Suspense>
-                  </SidebarWithHeader>
-                </>}
-            </CountProvider>
+                    {/* </Suspense> */}
+                  
+                {/* </>} */}
+      
           </ConstantsProvider>
+          </SideBarToggleProvider>
+          </SearchLoadingProvider>
         </ChakraProvider>
       </body>
     </html>

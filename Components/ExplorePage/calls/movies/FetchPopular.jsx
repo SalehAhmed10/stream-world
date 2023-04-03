@@ -64,12 +64,12 @@ export const FetchPopular = () => {
                 {popular.length > 0 && (
 
                     <>
-
+    
                         <Text fontSize={'2xl'} fontWeight={'thin'} mb={4}>
                             Now Playing Movies
                         </Text>
 
-                        <Carousel slidesToShow={3} slidesToScroll={3}>
+                        <Carousel>
 
                             {popular.map((popular) => {
                                 return (

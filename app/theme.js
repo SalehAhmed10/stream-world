@@ -61,6 +61,9 @@ const colors = {
     },
     dark: {
         bg: '#0a1016',
+        // secondary: '#1a202c',
+        secondary: '#1a202c',
+
         // text: '#fff',
         text: '#f5f5f5',
         borderColor: 'red',

@@ -62,7 +62,7 @@ export default function FetchHorror() {
                         <Text fontSize={'2xl'} fontWeight={'thin'} mb={4}>
                             Horror Movies
                         </Text>
-                        <Carousel slidesToShow={3} slidesToScroll={3}>
+                        <Carousel >
                             {horror.map((horror) => {
                                 return (
                                     <MovieCard

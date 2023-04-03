@@ -2,11 +2,13 @@
 
 
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
-import { Box, Button, Flex, Input } from '@chakra-ui/react'
+import React, { use, useEffect, useState } from 'react'
+import { Box, Button, Flex, Input, useColorModeValue } from '@chakra-ui/react'
 import { FiSearch } from 'react-icons/fi'
 import { useColorMode } from '@chakra-ui/react'
 // import { useSearchQuery } from '@/context/SearchQuery'
+import './appsearch.css'
+
 
 
 
@@ -61,30 +63,47 @@ function AppSearch() {
     }
 
 
-
-
-
     return (
 
         <>
             <Box w={{
                 base: '100%',
-                md: '100%',
-                lg: '100%',
-                xl: '100%',
+                // md: '100%',
+                // lg: '100%',
+                // xl: '100%',
             }}>
                 <form onSubmit={handleSubmit} >
 
                     <Flex >
                         <Input
+                            value={query}
+                            onChange={handleChange}
                             type='text'
                             placeholder={
                                 // if isSubmitting is true then show submitting else show search and if isError is true then show error
-                                isSubmitting ? 'Searching..' : isError ? 'Search Failed | Try Again' : 'Search'
-
+                                isSubmitting ? 'Searching..' : isError ? 'Search Failed | Try Again' : 'Browse Movies, TV Shows and more...'
                             }
-                            value={query}
-                            onChange={handleChange}
+                            className='search-bar'
+                            outlineOffset={'none'}
+                            color={useColorModeValue('gray.700', 'gray.100')}
+                            _placeholder={{
+                                color: useColorModeValue('gray.900', 'gray.300'),
+                                fontSize: {
+                                    base: '12px',
+                                    md: '1rem',
+
+                                }
+                            }}
+                            border='0px'
+                            // backgroundColor={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+                            backgroundColor={useColorModeValue('gray.300', 'gray.700')}
+                            background="url('https://img.icons8.com/ios/50/000000/search--v1.png') no-repeat right 1rem center"
+                            
+                            backgroundRepeat="no-repeat"
+                            backgroundPosition="right 1rem center"
+                            backgroundSize="1.5rem 1.5rem"
+                            // onlick background image to submit
+  
                         // onpress enter key to submit
                         // className={
                         //     colorMode === 'light' ? 'search-bar-dark' : 'search-bar-light'
