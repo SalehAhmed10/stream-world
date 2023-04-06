@@ -5,7 +5,7 @@
 
 | author  | Demo  |
 |---|---|
-|  [@SalehAhmed10](https://www.github.com/SalehAhmed10)| [stream-world.vercel.app/](stream-world.vercel.app/)   |
+|  [@SalehAhmed10](https://www.github.com/SalehAhmed10)| [stream-world.vercel.app/](https://stream-world.vercel.app/)   |
 
 
 ### Stack : Nextjs | ChakraUi | Slider | Theme Switch
