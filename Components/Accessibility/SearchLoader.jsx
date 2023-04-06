@@ -22,7 +22,7 @@ export default function SearchLoader() {
             
 >
         {/* {isSearchLoading ? "Loading..." : ""} */}
-        <div class="loader"></div>
+        <div className="loader"></div>
         
     </Box>
   )

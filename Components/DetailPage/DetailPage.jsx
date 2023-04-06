@@ -54,7 +54,7 @@ export default function DetailPage({ movieId, tvId }) {
             const response = await fetch(`https://api.themoviedb.org/3/${checkMediaType(isTv, isMovie)}/${movieId || tvId}?api_key=${apiKey}&language=en-US&append_to_response=videos`)
             const data = await response.json()
             setDetail(data)
-            console.log(data)
+            // console.log(data)
             /// data.videos is undefined donot set state if undefined
             if (data.videos) {
                 setDetailVideos(data.videos.results)

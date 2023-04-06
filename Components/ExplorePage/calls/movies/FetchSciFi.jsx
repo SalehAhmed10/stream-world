@@ -21,7 +21,7 @@ export default function FetchSciFi() {
             .then(res => res.json())
             .then(data => {
                 setScifi(data.results)
-                console.table(data.results);
+                // console.table(data.results);
             }
             )
             .catch(err => {

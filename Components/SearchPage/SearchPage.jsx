@@ -32,8 +32,8 @@ function SearchPage() {
         setIsSearchLoading(false)
         setResult((prevResults) => [...prevResults, ...data.results])
         setTotalPages(data.total_pages)
-        console.log(data)
-        console.log(data.results)
+        // console.log(data)
+        // console.log(data.results)
     }
 
     const handleLoadMore = () => {

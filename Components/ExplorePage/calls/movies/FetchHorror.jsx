@@ -35,7 +35,7 @@ export default function FetchHorror() {
             .then(res => res.json())
             .then(data => {
                 setHorror(data.results)
-                console.table(data.results);
+                // console.table(data.results);
             }
             )
             .catch(err => {

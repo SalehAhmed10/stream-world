@@ -29,7 +29,7 @@ export const FetchPopular = () => {
         } else {
 
             setPopular(data.results)
-            console.log(data.results)
+            // console.log(data.results)
         }
 
     }
