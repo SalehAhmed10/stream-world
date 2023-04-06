@@ -34,6 +34,7 @@ function SearchPage() {
         setTotalPages(data.total_pages)
         // console.log(data)
         // console.log(data.results)
+        // hello
     }
 
     const handleLoadMore = () => {
